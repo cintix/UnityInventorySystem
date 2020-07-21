@@ -9,9 +9,12 @@ public class Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Transform currentParent = null;
+    private Vector3 localScale;
+
     void Awake () {
         rectTransform = GetComponent<RectTransform> ();
         canvasGroup = GetComponent<CanvasGroup> ();
+        localScale = rectTransform.localScale;
     }
 
     public void OnBeginDrag (PointerEventData eventData) {
@@ -42,6 +45,7 @@ public class Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
         }
 
         transform.localPosition = Vector3.zero;
+        rectTransform.localScale = localScale;
     }
 
     public void OnPointerDown (PointerEventData eventData) {
